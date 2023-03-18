@@ -2,8 +2,7 @@
 // const jwt = require("jsonwebtoken");
 const express = require("express");
 const router = express.Router();
-// const passport = require("passport");
-// const middlewareWrapper = require("cors");
+
 const { verifyuser } = require("../middleware/auth.middleware");
 const {
   fetchUserDataByEmail,

@@ -60,7 +60,6 @@ exports.registerController = (req, res) => {
       });
     }
   });
-
 };
 
 exports.loginController = (req, res) => {
@@ -82,8 +81,7 @@ exports.loginController = (req, res) => {
         });
       }
 
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) {
+      if (!(await user.authenticate(password))) {
         return res.status(400).json({
           error: "Email and password do not match",
         });
@@ -114,10 +112,8 @@ exports.loginController = (req, res) => {
 };
 
 exports.fetchUserDataByEmail = async (req, res) => {
-  // req.user contains the user id stored from in the session cookie
   console.log(req.body);
-  // const { email } = req.user;
-  console.log("uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu" + req.user);
+
   await User.findOne({
     email: req.user.email,
   }).exec((err, user) => {
