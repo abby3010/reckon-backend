@@ -18,7 +18,7 @@ async function uploadImage(imageBase64) {
     try {
         // The secure_url is the url of the image on the cloudinary server with https protocol
         let secure_url = null;
-
+        let public_id = null;
         // The cloudinary.uploader.upload() function returns a promise
         // It takes in the path of the image to be uploaded and the upload options
         // We can even pass in base64 encoded image data in the .upload() function
@@ -27,10 +27,11 @@ async function uploadImage(imageBase64) {
                 throw error;
             } else {
                 secure_url = result.secure_url;
+                public_id = result.public_id;
             }
         });
 
-        return secure_url;
+        return { secure_url, public_id };
     } catch (error) {
         throw error;
     }

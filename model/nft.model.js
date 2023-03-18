@@ -2,12 +2,15 @@ const mongoose = require("mongoose");
 
 const Nftschema = new mongoose.Schema(
   {
+    tokenId: {
+      type: String,
+      required: true,
+    },
     name: {
       type: String,
       max: 255,
       required: true,
     },
-
     organization: {
       type: String,
       required: true,
@@ -19,8 +22,8 @@ const Nftschema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    approve: {
-      value: false,
+    approved: {
+      default: false,
     },
     shares: {
       type: Number,

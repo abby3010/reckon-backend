@@ -1,0 +1,38 @@
+// MongoDB Playground
+// To disable this template go to Settings | MongoDB | Use Default Template For Playground.
+// Make sure you are connected to enable completions and to be able to run a playground.
+// Use Ctrl+Space inside a snippet or a string literal to trigger completions.
+
+// Select the database to use.
+use('dpebtdvggvlyrcacia5y');
+
+// The drop() command destroys all data from a collection.
+// Make sure you run it against the correct database and collection.
+
+// Insert a few documents into the sales collection.
+db.sell.insertMany([
+  { 'price': 100, 'quantity' : 10, 'userId': '0xa93854db5133468a46c6a7ae57aeaeb31d22bdbe'},
+  // { '_id': 2, 'price': 101, 'quantity' : 20, 'userId': '63d5a76f8cc620abaf18d6bd', 'date': new Date('2014-03-01T09:00:00Z')},
+  // { '_id': 3, 'price': 101, 'quantity' : 10, 'userId': '63d5a76f8cc620abaf18d6bd', 'date': new Date('2014-03-15T09:00:00Z')},
+]);
+
+// db.sell.insertMany([
+//   { '_id': 1, 'price': 100, 'quantity' : 10, 'userId': '63d5a76f8cc620abaf18d6bd','date': new Date('2014-03-01T09:00:00Z')},
+//   { '_id': 2, 'price': 101, 'quantity' : 30, 'userId': '63d51bfd38b05a4b2cce6e02', 'date': new Date('2014-03-01T09:00:00Z')},
+//   { '_id': 3, 'price': 101, 'quantity' : 10, 'userId': '63d51bfd38b05a4b2cce6e02', 'date': new Date('2014-03-15T09:00:00Z')},
+// ]);
+
+
+// // Run a find command to view items sold on April 4th, 2014.
+// db.sales.find({ date: { $gte: new Date('2014-04-04'), $lt: new Date('2014-04-05') } });
+
+// // Build an aggregation to view total sales for each product in 2014.
+// const aggregation = [
+//   { $match: { date: { $gte: new Date('2014-01-01'), $lt: new Date('2015-01-01') } } },
+//   { $group: { _id: '$item', totalSaleAmount: { $sum: { $multiply: [ '$price', '$quantity' ] } } } }
+// ];
+
+// // Run the aggregation and open a cursor to the results.
+// // Use toArray() to exhaust the cursor to return the whole result set.
+// // You can use hasNext()/next() to iterate through the cursor page by page.
+// db.sales.aggregate(aggregation);

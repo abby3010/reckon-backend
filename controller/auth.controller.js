@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
-const User = require("../modal/user.modal");
+const User = require("../model/user.model");
 
 exports.registerController = (req, res) => {
   const { name, email, password, walletAddress, balance } = req.body;
@@ -29,6 +29,7 @@ exports.registerController = (req, res) => {
       const user = new User({
         name,
         email,
+        hashed_password,
         walletAddress,
         balance: parseInt(balance) / 1000000000000000000,
         password: hashed_password,
@@ -81,11 +82,13 @@ exports.loginController = (req, res) => {
         });
       }
 
-      if (!(await user.authenticate(password))) {
-        return res.status(400).json({
-          error: "Email and password do not match",
-        });
-      }
+      bcrypt.compare(password, user.password, function (err, result) {
+        if (err) {
+          return res.status(400).json({
+            error: "Invalid Password",
+          });
+        }
+      });
 
       const token = jwt.sign(
         {

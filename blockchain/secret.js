@@ -1,0 +1,1 @@
+export const secret = "faint job trash miracle bring athlete weather aerobic disagree arch rebel swim"
