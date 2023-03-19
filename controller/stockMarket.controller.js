@@ -1,5 +1,6 @@
 const { dynamicBuyOrderModel } = require("../model/stock.model");
 const stockMarketService = require("../services/stockMarket");
+const User = require("../model/user.model");
 
 async function placeBuyOrderForNFTShare(req, res) {
     const { nftId, shares, price, userAddress } = req.body;
@@ -65,5 +66,32 @@ function getCurrentPriceOfNFTShare(req, res) {
     });
 }
 
+const saveShareExchangeHistoryToUserDoc = async (req, res) => {
+    const { ticker_symbol, quantity, price, buyerId, order_type, email } = req.body;
 
-module.exports = { placeBuyOrderForNFTShare, placeSellOrderForNFTShare, getCurrentPriceOfNFTShare }
+    let exchangeData = {
+        ticker_symbol,
+        quantity,
+        price,
+        buyerId,
+        order_type
+    };
+
+    let result =
+        await User.findOneAndUpdate({
+            email: email
+        }, {
+            $push: {
+                trades: {
+                    exchangeData
+                }
+            }
+        });
+
+    return res.status(200).json({
+        result: result,
+    })
+}
+
+
+module.exports = { saveShareExchangeHistoryToUserDoc, placeBuyOrderForNFTShare, placeSellOrderForNFTShare, getCurrentPriceOfNFTShare }

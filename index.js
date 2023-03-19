@@ -62,6 +62,7 @@ const main = async () => {
   const adminRoute = require("./routes/admin.routes");
   const nftRoutes = require("./routes/nft.routes");
   const tradingRoutes = require("./routes/stockMarket.routes")
+  const stripeRoutes = require("./routes/stripe.routes")
   // const ACoinRoutes = require('./routes/ACoinRoutes');
   app.use(require("./routes/ACoinRoutes"));
   app.use(require("./routes/DivisibleNFTRoutes"));
@@ -74,6 +75,8 @@ const main = async () => {
   app.use("/api/trade", tradingRoutes);
 
   app.use("/api/nft", nftRoutes);
+
+  app.use("/api/stripe", stripeRoutes)
 
   // Serve static assets if in production
   app.use("/", function (req, res) {
